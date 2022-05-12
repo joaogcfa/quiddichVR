@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Goal : MonoBehaviour
 {
+
+    public bool goalP1;
+    private bool hasCollide = false;
+    private int score;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +24,30 @@ public class Goal : MonoBehaviour
 
     void OnTriggerEnter(Collider col){
         if (col.tag == "Ball"){
-            print("GOAL");
+
+            if (hasCollide == false)
+            {
+                if(goalP1){
+                    score = int.Parse(GameObject.Find("PlacarP1").GetComponent<Text>().text)+1;
+                    GameObject.Find("PlacarP1").GetComponent<Text>().text = score.ToString();
+                    print("GOAL");
+                }
+                else{
+                    score = int.Parse(GameObject.Find("PlacarP2").GetComponent<Text>().text)+1;
+                    GameObject.Find("PlacarP2").GetComponent<Text>().text = score.ToString();
+                    print("GOAL");
+                }
+                hasCollide = true;
+                StartCoroutine(CoolDown());
+            }
         }
+    }
+
+    IEnumerator CoolDown()
+    {
+
+        yield return new WaitForSeconds(1);
+        hasCollide = false;
+
     }
 }
