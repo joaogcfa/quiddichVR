@@ -14,11 +14,18 @@ public class PlayerMovement : MonoBehaviour
     public SteamVR_Behaviour_Pose trackedObj;
 
     public Quaternion rotation_hand;
+    
+    public AudioSource audioSource; 
+    public AudioClip woosh; 
+    public AudioClip wind; 
+    public AudioClip inverted; 
+
+    public bool boleana;
 
     private void Start()
 
         {
-
+            boleana = true;
             trackedObj = LeftHand.GetComponent<SteamVR_Behaviour_Pose>();
 
         }
@@ -29,10 +36,26 @@ public class PlayerMovement : MonoBehaviour
 
         if (botao.GetState(trackedObj.inputSource))
             {
-                print("Cliquei");
+                if(boleana){
+                    print("oi");
+                    audioSource.Play();
+                //     if()
+                //     audioSource.clip = wind;
+                //     audioSource.Play();
+                }
                 transform.position += LeftHand.transform.forward;
-                
+                boleana = false;
             }
+
+        if (botao.GetStateUp(trackedObj.inputSource)){
+            // wind.Pause();
+            // inverted.Play();
+            boleana = true;
+        }
+        // if(boleana){
+
+        // }
+        // boleana = true;
 
         // transform.rotation(rotation_hand);
         // print("Rotation: " + LeftHand.transform.rotation);

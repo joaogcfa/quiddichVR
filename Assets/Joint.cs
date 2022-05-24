@@ -7,7 +7,10 @@ using Valve.VR;
 public class Joint : MonoBehaviour
 {
     public GameObject bola;
+        public float desiredDuration = 1.0f;
+        private float elapsedTime;
         public Rigidbody attachPoint;
+        public float distance;
         
         public SteamVR_Action_Boolean botao = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("InteractUI");
 
@@ -25,13 +28,21 @@ public class Joint : MonoBehaviour
         {
             // print(botao.Single);
             //Criar e prende objeto na mão do usuário
-            if (joint == null && botao.GetStateDown(trackedObj.inputSource))
+            if (botao.GetState(trackedObj.inputSource))
             {
+                print("estou aqui");
                 // GameObject bola = GameObject.Instantiate(prefab);
-                bola.transform.position = attachPoint.transform.position;
+                elapsedTime += Time.deltaTime;
+                float percentageComplete = elapsedTime / desiredDuration;
 
-                joint = bola.AddComponent<FixedJoint>();
-                joint.connectedBody = attachPoint;
+                bola.transform.position = Vector3.Lerp(bola.transform.position, attachPoint.transform.position, 0.5f);
+
+                if (joint == null && Vector3.Distance(bola.transform.position, attachPoint.transform.position) < distance)
+                {
+                    joint = bola.AddComponent<FixedJoint>();
+                    joint.connectedBody = attachPoint;
+                }
+                
             }
             // Lança o objeto
             else if (joint != null && botao.GetStateUp(trackedObj.inputSource))
@@ -54,6 +65,16 @@ public class Joint : MonoBehaviour
                 // }
                 // rigidbody.maxAngularVelocity = rigidbody.angularVelocity.magnitude;
             }
+        }
+
+        IEnumerator WaitAndMove(float delayTime){
+            yield return new WaitForSeconds(delayTime); // start at time X
+            float startTime=Time.time; // Time.time contains current frame time, so remember starting point
+            while(Time.time-startTime<=1){ // until one second passed
+                bola.transform.position = Vector3.Lerp(bola.transform.position,attachPoint.transform.position,Time.time-startTime); // lerp from A to B in one second
+                yield return 1; // wait for next frame
+            }
+            
         }
 
 }
