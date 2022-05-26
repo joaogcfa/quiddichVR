@@ -30,7 +30,6 @@ public class Joint : MonoBehaviour
             //Criar e prende objeto na mão do usuário
             if (botao.GetState(trackedObj.inputSource))
             {
-                print("estou aqui");
                 // GameObject bola = GameObject.Instantiate(prefab);
                 elapsedTime += Time.deltaTime;
                 float percentageComplete = elapsedTime / desiredDuration;

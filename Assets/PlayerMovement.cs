@@ -37,17 +37,23 @@ public class PlayerMovement : MonoBehaviour
         if (botao.GetState(trackedObj.inputSource))
             {
                 if(boleana){
-                    print("oi");
-                    audioSource.Play();
+                    audioSource.PlayOneShot(woosh, 0.7f);
+
+
                 //     if()
                 //     audioSource.clip = wind;
                 //     audioSource.Play();
                 }
+                if(!audioSource.isPlaying)
+                    audioSource.PlayOneShot(wind, 0.7f);
+                    
                 transform.position += LeftHand.transform.forward;
                 boleana = false;
             }
 
         if (botao.GetStateUp(trackedObj.inputSource)){
+            audioSource.Pause();
+            
             // wind.Pause();
             // inverted.Play();
             boleana = true;
