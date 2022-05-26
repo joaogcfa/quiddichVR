@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Goal : MonoBehaviour
 {
 
+    public AudioSource soundGoal;
     public bool goalP1;
     private bool hasCollide = false;
     private int score;
@@ -31,11 +32,13 @@ public class Goal : MonoBehaviour
                     score = int.Parse(GameObject.Find("PlacarP1").GetComponent<Text>().text)+1;
                     GameObject.Find("PlacarP1").GetComponent<Text>().text = score.ToString();
                     print("GOAL");
+                    soundGoal.Play();
                 }
                 else{
                     score = int.Parse(GameObject.Find("PlacarP2").GetComponent<Text>().text)+1;
                     GameObject.Find("PlacarP2").GetComponent<Text>().text = score.ToString();
                     print("GOAL");
+                    soundGoal.Play();
                 }
                 hasCollide = true;
                 StartCoroutine(CoolDown());
