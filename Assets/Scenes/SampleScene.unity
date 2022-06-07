@@ -155,6 +155,7 @@ MonoBehaviour:
   woosh: {fileID: 8300000, guid: 558e8cf74c7b29843a866261892e8e49, type: 3}
   wind: {fileID: 8300000, guid: e66e042ec0beba243bb28849ae15a33b, type: 3}
   inverted: {fileID: 8300000, guid: 79f37d970b3e04b4e8520054eadeabb7, type: 3}
+  vel: 1
   boleana: 0
 --- !u!114 &30056909
 MonoBehaviour:
@@ -967,6 +968,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 0}
+  player: {fileID: 0}
+  goalkeeperz: 0
+  velocidade: 0.08
 --- !u!65 &452986571
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2102,15 +2106,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bbd39231d7260924ab38e20633770474, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -25.4
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bbd39231d7260924ab38e20633770474, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 65.3
+      value: 79.98
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bbd39231d7260924ab38e20633770474, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 209.9
+      value: 202.22
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bbd39231d7260924ab38e20633770474, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2168,7 +2172,7 @@ MonoBehaviour:
   attachPoint: {fileID: 1927479498}
   distance: 0
   botao:
-    actionPath: /actions/default/in/InteractUI
+    actionPath: /actions/default/in/GrabGrip
     needsReinit: 0
 --- !u!54 &1624831474
 Rigidbody:

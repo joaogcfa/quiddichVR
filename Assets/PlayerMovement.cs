@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip wind; 
     public AudioClip inverted; 
 
+    public float vel = 0.1f;
+
     public bool boleana;
 
     private void Start()
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
                 if(!audioSource.isPlaying)
                     audioSource.PlayOneShot(wind, 0.7f);
                     
-                transform.position += LeftHand.transform.forward;
+                transform.position += LeftHand.transform.forward*vel;
                 boleana = false;
             }
 
